@@ -10,4 +10,6 @@ COPY tsconfig.json .
 COPY nest-cli.json .
 COPY src src
 
+EXPOSE 3000
+
 CMD ["yarn", "start"]

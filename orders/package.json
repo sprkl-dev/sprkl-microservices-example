@@ -1,6 +1,12 @@
 {
   "name": "orders",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "fastify": "^4.2.0",
+    "mongodb": "^4.7.0"
+  }
 }

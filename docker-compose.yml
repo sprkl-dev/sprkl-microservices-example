@@ -2,10 +2,16 @@ version: "3"
 
 services:
 
-  payments:
-    build: ./payments
+  orders:
+    build: ./orders
     ports:
       - 3000:3000
+    environment:
+      MONGO_HOST: mongodb
+      PAYMENTS_URL: http://payments:3000
+
+  payments:
+    build: ./payments
     environment:
       PG_HOST: pg
       PG_USER: admin
@@ -18,8 +24,6 @@ services:
       - 27017:27017
     volumes:
       - mongodb-data:/data/db
-    env_file:
-      ./mongodb.env
 
   pg:
     image: "postgres"

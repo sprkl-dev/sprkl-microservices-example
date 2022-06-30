@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+
+  payments:
+    build: ./payments
+    ports:
+      - 3000:3000
+    environment:
+      PG_HOST: pg
+      PG_USER: admin
+      PG_PASSWORD: admin
+
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+    env_file:
+      ./mongodb.env
+
+  pg:
+    image: "postgres"
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      ./pg.env
+    environment:
+      PGDATA: /data/pg
+    volumes:
+      - pg-data:/data/pg
+
+volumes:
+  pg-data:
+  mongodb-data:

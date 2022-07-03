@@ -1,6 +1,7 @@
 const fastify = require('fastify')({ logger: { level: 'trace' } })
 const crypto = require('crypto')
 const {MongoClient} = require('mongodb');
+const {default: axios} = require('axios');
 
 const mongoHost = process.env.MONGO_HOST
 const mongoPort = process.env.MONGO_PORT ?? 27017
@@ -25,12 +26,7 @@ async function bootstap() {
 async function pay({amount, orderId}) {
   console.log({amount, orderId})
   try {
-    await fetch(`${paymentsURL}/payments`, 
-      {
-        method: 'POST', 
-        body: JSON.stringify({ amount, orderId }),
-        headers: { "Content-Type": "application/json" },
-      })
+    await axios.post(`${paymentsURL}/payments`, { amount, orderId })
     return true
   } catch(e) {
     fastify.log.error(e)
@@ -40,7 +36,7 @@ async function pay({amount, orderId}) {
 
 async function getTotalPrice(itemNames) {
   try {
-    const catalog = await (await fetch(`${catalogURL}/catalog`)).json()
+    const catalog = await (await axios.get(`${catalogURL}/catalog`)).data
     const itemPriceByName = new Map();
     const itemPriceById = new Map();
     for (const item of catalog) {

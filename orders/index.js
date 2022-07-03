@@ -37,6 +37,7 @@ async function pay({amount, orderId}) {
 async function getTotalPrice(itemNames) {
   try {
     const catalog = await (await axios.get(`${catalogURL}/catalog`)).data
+    console.log(catalog);
     const itemPriceByName = new Map();
     const itemPriceById = new Map();
     for (const item of catalog) {

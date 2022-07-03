@@ -9,6 +9,7 @@ services:
     environment:
       MONGO_HOST: mongodb
       PAYMENTS_URL: http://payments:3000
+      CATALOG_URL: http://catalog:3000
 
   payments:
     build: ./payments
@@ -16,6 +17,9 @@ services:
       PG_HOST: pg
       PG_USER: admin
       PG_PASSWORD: admin
+
+  catalog:
+    build: ./catalog
 
   mongodb:
     image: mongo

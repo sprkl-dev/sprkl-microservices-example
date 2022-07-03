@@ -13,7 +13,7 @@ export class PaymentsController {
 
   @Post()
   async pay(@Body() dto: PaymentDto) {
-    console.log(dto);
+    console.log(dto)
     const entity = new Payment();
     entity.amount = dto.amount;
     entity.orderId = dto.orderId;

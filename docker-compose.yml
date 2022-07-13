@@ -49,6 +49,16 @@ services:
     ports:
       - 6379:6379
 
+  shop:
+    image: node:18-alpine
+    restart: always
+    volumes:
+      - "./shop:/usr/src/app"
+    ports:
+      - "5000:5000"
+    working_dir: /usr/src/app
+    command: sh -c "yarn install && yarn run dev"
+
 volumes:
   pg-data:
   mongodb-data:

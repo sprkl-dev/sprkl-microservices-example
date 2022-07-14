@@ -4,4 +4,4 @@ WORKDIR /code/
 
 RUN yarn
 
-CMD yarn dev
+CMD yarn serve

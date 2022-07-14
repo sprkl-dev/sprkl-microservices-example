@@ -50,14 +50,12 @@ services:
       - 6379:6379
 
   shop:
-    image: node:18-alpine
+    build: ./shop
     restart: always
     volumes:
-      - "./shop:/usr/src/app"
+      - "./shop:/code/"
     ports:
-      - "5000:5000"
-    working_dir: /usr/src/app
-    command: sh -c "yarn install && yarn run dev"
+      - "80:5000"
 
 volumes:
   pg-data:

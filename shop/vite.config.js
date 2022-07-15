@@ -7,10 +7,15 @@ export default ({ mode }) => {
 
   return defineConfig({
     plugins: [react(), svgr()],
-
     server: {
       host: '0.0.0.0',
       port: 5000,
+      watch: {
+        usePolling: true
+      },
+      hmr: {
+        clientPort: 80
+      },
       proxy: {
         '/api/catalog': {
           target: `${process.env['VITE_CATALOG_URL']}`,

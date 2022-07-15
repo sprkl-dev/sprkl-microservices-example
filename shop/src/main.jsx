@@ -7,6 +7,8 @@ import {
 import App from "./App";
 import Catalog from "./routes/catalog";
 import Orders from "./routes/orders";
+import Product from "./routes/product";
+import Cart from "./routes/cart";
 import "normalize.css";
 import "./index.scss";
 
@@ -20,6 +22,8 @@ root.render(
             <Route path="/" element={<App />}>
                 <Route path="" element={<Catalog />} />
                 <Route path="orders" element={<Orders />} />
+                <Route path="cart" element={<Cart />} />
+                <Route path="product/:id" element={<Product />} />
             </Route>
         </Routes>
     </BrowserRouter>

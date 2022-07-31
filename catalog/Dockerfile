@@ -6,6 +6,7 @@ COPY yarn.lock .
 RUN yarn
 
 COPY index.js .
+COPY catalog.js .
 
 EXPOSE 3000
 

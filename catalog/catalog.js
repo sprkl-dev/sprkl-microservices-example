@@ -27,4 +27,4 @@ async function getCatalog() {
 
 setCatalog()
 
-module.exports = getCatalog
+module.exports.getCatalog = getCatalog

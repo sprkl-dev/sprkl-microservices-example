@@ -26,39 +26,50 @@ async function bootstap() {
 
 
 fastify.post('/orders', async function (request, reply) {
-  const { items } = request.body;
-  const order = { id: crypto.randomUUID(), items: items, state: 'pre-validation' }
-  if (!Array.isArray(items) || items.some(item => typeof item !== 'string')) {
-    order.state = 'invalid'
+    const { items } = request.body;
+    const order = { id: crypto.randomUUID(), items: items, state: 'pre-validation' }
+    if (!Array.isArray(items) || items.some(item => typeof item !== 'string')) {
+      order.state = 'invalid'
+      ordersCollection.insertOne(order);
+      reply.send(order.state).code(400);
+       return;
+    }
+    const totalPrice = await getTotalPrice(items)
+    console.log(totalPrice)
+    if (totalPrice < 0) {
+      order.state = 'invalid'
+      ordersCollection.insertOne(order);
+      reply.send(order.state).code(400);
+      return;
+    }
+    order.state = 'pre-payment'
+    if (!(await pay({amount: totalPrice, orderId: order.id}))) {
+      order.state = 'payment-failed'
+      ordersCollection.insertOne(order);
+      reply.send(order.state).code(400);
+     return;
+    }
+    order.state = 'landed'
     ordersCollection.insertOne(order);
-    reply.send(order.state).code(400);
-    return;
-  }
-  const totalPrice = await getTotalPrice(items)
-  console.log(totalPrice)
-  if (totalPrice < 0) {
-    order.state = 'invalid'
-    ordersCollection.insertOne(order);
-    reply.send(order.state).code(400);
-    return;
-  }
-  order.state = 'pre-payment'
-  if (!(await pay({amount: totalPrice, orderId: order.id}))) {
-    order.state = 'payment-failed'
-    ordersCollection.insertOne(order);
-    reply.send(order.state).code(400);
-    return;
-  }
-  order.state = 'landed'
-  ordersCollection.insertOne(order);
-  reply.send(order.state).code(200);
-})
+    reply.send(order.state).code(200);
+  })
 
 fastify.get('/orders', async function (request, reply) {
   const orders = [];
   const cursor = await ordersCollection.find()
   await cursor.forEach((order) => orders.push(order))
   reply.send(orders).code(200);
+})
+
+
+fastify.get('/healthz', async function(request, reply) {
+  try {
+    await axios.get(`${catalogURL}/catalog`)
+    await axios.get(`${paymentsURL}/payments`)
+    return reply.send("Ready").code(200);
+  } catch (ex) {
+    reply.send("Failed checking catalog & payments").code(400)
+  }
 })
 
 bootstap()

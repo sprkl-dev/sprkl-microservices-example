@@ -2,6 +2,11 @@
   "name": "sprkl-microservices-example",
   "private": "true",
   "scripts": {
+    "start": "docker-compose up --force-recreate --build",
+    "start:sprkl": "sprkl docker compose up --force-recreate --build",
+    "test": "jest",
+    "test:e2e": "concurrently \"npm run start\" \"npm run test\"",
+    "test:e2e:sprkl": "concurrently \"npm run start:sprkl\" \"sprkl -- npm run test\"",
     "orders:mongosh": "docker exec -it sprkl-microservices-example-mongodb-1 mongosh orders",
     "payments:psql": "docker exec -it -e POSTGRESS_PASSWORD=admin sprkl-microservices-example-pg-1 psql -U admin payments"
   },
@@ -9,5 +14,11 @@
     "catalog",
     "orders",
     "payments"
-  ]
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "axios": "^0.27.2",
+    "concurrently": "^7.2.2",
+    "jest": "^28.1.2"
+  }
 }

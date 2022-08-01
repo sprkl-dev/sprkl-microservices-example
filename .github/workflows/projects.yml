@@ -1,0 +1,19 @@
+name: Add bugs and PRs to Main project
+
+on:
+  issues:
+    types:
+      - opened
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  add-to-project:
+    name: Add issue and PRs to Main project
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/orgs/sprkl-dev/projects/2
+          github-token: ${{ secrets.PROJECTS_PAT }}

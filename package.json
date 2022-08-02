@@ -4,5 +4,10 @@
   "scripts": {
     "orders:mongosh": "docker exec -it sprkl-microservices-example-mongodb-1 mongosh orders",
     "payments:psql": "docker exec -it -e POSTGRESS_PASSWORD=admin sprkl-microservices-example-pg-1 psql -U admin payments"
-  }
+  },
+  "workspaces": [
+    "catalog",
+    "orders",
+    "payments"
+  ]
 }

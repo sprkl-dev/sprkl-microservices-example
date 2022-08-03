@@ -1,0 +1,16 @@
+on: 
+  push:
+    branches:
+      - '**'
+
+jobs:
+  install-sprkl-test:
+    runs-on: ubuntu-latest
+    name: Raz dont mind
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - run: yarn install
+      - run: yarn test
+

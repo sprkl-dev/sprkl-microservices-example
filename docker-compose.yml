@@ -52,8 +52,11 @@ services:
   shop:
     build: ./shop
     restart: always
+    environment:
+      VITE_CATALOG_URL: http://catalog:3000
+      VITE_ORDERS_URL: http://orders:3000
     volumes:
-      - "./shop:/code/"
+      - "./shop/src:/code/src"
     ports:
       - "80:5000"
 

@@ -2,15 +2,25 @@ on:
   push:
     branches:
       - '**'
-
 jobs:
   install-sprkl-test:
     runs-on: ubuntu-latest
-    name: Raz dont mind
+    name: Installing Sprkl Testing
     steps:
 
       - uses: actions/checkout@v3
 
-      - run: yarn install
-      - run: yarn test
 
+      - name: Sprkl Setup
+        uses: sprkl-dev/sprkl-action/setup@v0.0.30
+        with:
+          npm_token: ${{ secrets.SPRKL_NPM_TOKEN }}
+          setenv: false
+
+      - run: yarn install
+      - run: sprkl --recipe=all -- /bin/sh -c 'yarn test'
+
+      - name: Sprkl Push
+        uses: sprkl-dev/sprkl-action/push@v0.0.30
+        with:
+          token: ${{ secrets.SPRKL_CI_TOKEN }}

@@ -1,4 +1,4 @@
-const getCatalog = require('./catalog')
+const { getCatalog } = require('./catalog')
 
 const redis = require('redis-mock')
 

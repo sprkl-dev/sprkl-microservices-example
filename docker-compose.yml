@@ -52,8 +52,6 @@ services:
   shop:
     build: ./shop
     restart: always
-    volumes:
-      - "./shop:/code/"
     ports:
       - "80:5000"
 

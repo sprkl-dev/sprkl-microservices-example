@@ -1,25 +1,41 @@
 const axios = require('axios');
 
-const ORDERS_URL = "http://localhost:3000"
+const ORDERS_URL = "http://localhost:80/api/orders/orders"
+const CATALOG_URL = "http://localhost:80/api/catalog/catalog"
+const PAYMENTS_URL = "http://localhost:80/api/payments/payments"
 
-beforeAll(async () => {
-  // console.log("Polling server at 8080")
-  for (let i=0; i < 10; i++) {
-    // console.log("Polling server at 8080")
-    try {
-      await axios.get(ORDERS_URL + '/healthz')
-      console.log("Backend ready")
-      return ; 
-    } catch(ex) {
-      if (ex.response && ex.response.status == 200) { 
-        console.log("Backend ready")
-        return ;
-      }
-      console.log("Sleeping ")
-      await new Promise(r => setTimeout(r, 2000));
+async function checkAlive(url) {
+  try {
+    const res = await axios.get(url, { timeout: 100});
+    if (res.status == 200) {
+      return true
+    }
+  } catch(ex) { 
+    return false;
+  }
+
+  return false;
+}
+
+async function waitForAlive(url) {
+  for (let i=0; i < 200; i++) {
+    if (await checkAlive(url)) {
+      return true;
+    } else {
+      await new Promise(r => setTimeout(r, 100));
     }
   }
-}, 20000)
+
+  return false;
+}
+
+beforeAll(async () => {
+  for (const url of [ORDERS_URL, CATALOG_URL, PAYMENTS_URL]) {
+    if (await waitForAlive(url) == false) {
+      throw new Error(`${url} didn't start in time`)
+    }
+  }
+}, 50000)
 
 
 let config = {
@@ -44,7 +60,13 @@ const order = {
 }
 
 test('PlaceOrder', async () => {
-  const res = await axios.post(ORDERS_URL + '/orders', order, config)
+  const res = await axios.post(ORDERS_URL, order, config);
+  expect(res.status).toBe(200)
+})
+
+
+test('GetOrders', async () => {
+  const res = await axios.post(ORDERS_URL, order, config);
   expect(res.status).toBe(200)
 })
 

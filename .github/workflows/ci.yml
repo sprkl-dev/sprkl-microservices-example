@@ -18,7 +18,7 @@ jobs:
           setenv: false
 
       - run: yarn install
-      - run: sprkl --recipe=all -- /bin/sh -c 'yarn test'
+      - run: yarn test:e2e:sprkl
 
       - name: Sprkl Push
         uses: sprkl-dev/sprkl-action/push@v0.0.30

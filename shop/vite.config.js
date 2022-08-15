@@ -32,6 +32,11 @@ export default ({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api\/orders/, '')
         },
+        '/api/metrics': {
+          target: `${process.env['VITE_METRICS_URL']}`,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api\/metrics/, '')
+        },
       }
     }
   });

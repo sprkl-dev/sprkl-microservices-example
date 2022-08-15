@@ -12,5 +12,13 @@
   "transform": {
     "^.+\\.ts$": "ts-jest"
   },
+  "globals": {
+    "ts-jest": {
+      "tsconfig": {
+        "inlineSourceMap": true,
+        "target": "esnext"
+      }
+    }
+  },
   "testTimeout": 100000000
 }

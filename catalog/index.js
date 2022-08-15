@@ -27,5 +27,10 @@ app.get('/catalog', async (req, res) => {
   res.send(await getCatalog());
 })
 
+app.get('/healthz', async (req, res) => {
+  res.status(200)
+  res.send("Ready");
+})
+
 bootstrap();
 

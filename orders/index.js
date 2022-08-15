@@ -11,7 +11,7 @@ let ordersCollection;
 
 const paymentsURL = process.env.PAYMENTS_URL
 const catalogURL = process.env.CATALOG_URL
-
+const metricsURL = process.env.METRICS_URL
 
 async function bootstap() {
   try {
@@ -56,6 +56,7 @@ fastify.post('/orders', async function (request, reply) {
 
 fastify.get('/orders', async function (request, reply) {
   const orders = [];
+  await axios.put(`${metricsURL}/updateMetrics`)
   const cursor = await ordersCollection.find()
   await cursor.forEach((order) => orders.push(order))
   reply.send(orders).code(200);
@@ -64,8 +65,8 @@ fastify.get('/orders', async function (request, reply) {
 
 fastify.get('/healthz', async function(request, reply) {
   try {
-    await axios.get(`${catalogURL}/catalog`)
-    await axios.get(`${paymentsURL}/payments`)
+    await axios.get(`${catalogURL}/healthz`)
+    await axios.get(`${paymentsURL}/healthz`)
     return reply.send("Ready").code(200);
   } catch (ex) {
     reply.send("Failed checking catalog & payments").code(400)

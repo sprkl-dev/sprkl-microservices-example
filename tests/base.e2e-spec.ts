@@ -1,12 +1,13 @@
+import Metrics from "../metrics/models/metric";
+
 const axios = require('axios');
 
-const ORDERS_URL = "http://localhost:80/api/orders/orders"
-const CATALOG_URL = "http://localhost:80/api/catalog/catalog"
-const PAYMENTS_URL = "http://localhost:80/api/payments/payments"
+const BASE_URL = "http://localhost:80/api"
+const ORDERS_URL = `${BASE_URL}/orders/orders`
 
 async function checkAlive(url) {
   try {
-    const res = await axios.get(url, { timeout: 100});
+    const res = await axios.get(`${url}`, { timeout: 100});
     if (res.status == 200) {
       return true
     }
@@ -17,9 +18,10 @@ async function checkAlive(url) {
   return false;
 }
 
-async function waitForAlive(url) {
+async function waitForAlive(svc) {
+  const healtzUrl = `${BASE_URL}/${svc}/healthz`
   for (let i=0; i < 200; i++) {
-    if (await checkAlive(url)) {
+    if (await checkAlive(healtzUrl)) {
       return true;
     } else {
       await new Promise(r => setTimeout(r, 100));
@@ -30,9 +32,9 @@ async function waitForAlive(url) {
 }
 
 beforeAll(async () => {
-  for (const url of [ORDERS_URL, CATALOG_URL, PAYMENTS_URL]) {
-    if (await waitForAlive(url) == false) {
-      throw new Error(`${url} didn't start in time`)
+  for (const svc of ['orders', 'catalog', 'metrics', 'payments']) {
+    if (await waitForAlive(svc) == false) {
+      throw new Error(`${svc} didn't start in time`)
     }
   }
 }, 50000)
@@ -60,7 +62,7 @@ const order = {
 }
 
 test('PlaceOrder', async () => {
-  const res = await axios.post(ORDERS_URL, order, config);
+    const res = await axios.post(ORDERS_URL, order, config);
   expect(res.status).toBe(200)
 })
 

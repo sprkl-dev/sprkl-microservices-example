@@ -9,6 +9,11 @@ services:
       PAYMENTS_URL: http://payments:3000
       CATALOG_URL: http://catalog:3000
 
+  metrics:
+    build: ./metrics
+    environment:
+      MONGO_HOST: mongodb
+
   payments:
     build: ./payments
     environment:
@@ -41,6 +46,7 @@ services:
     build: ./shop
     restart: always
     environment:
+      VITE_METRICS_URL: http://metrics:3000
       VITE_CATALOG_URL: http://catalog:3000
       VITE_ORDERS_URL: http://orders:3000
       VITE_PAYMENTS_URL: http://payments:3000

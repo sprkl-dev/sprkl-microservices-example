@@ -56,7 +56,6 @@ fastify.post('/orders', async function (request, reply) {
 
 fastify.get('/orders', async function (request, reply) {
   const orders = [];
-  await axios.put(`${metricsURL}/updateMetrics`)
   const cursor = await ordersCollection.find()
   await cursor.forEach((order) => orders.push(order))
   reply.send(orders).code(200);

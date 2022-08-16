@@ -68,7 +68,7 @@ test('PlaceOrder', async () => {
 
 
 test('GetOrders', async () => {
-  const res = await axios.post(ORDERS_URL, order, config);
+  const res = await axios.get(ORDERS_URL, order);
   expect(res.status).toBe(200)
 })
 

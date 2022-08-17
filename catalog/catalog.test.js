@@ -1,8 +1,8 @@
+jest.mock('redis', () => jest.requireActual('redis-mock'));
+
 const { getCatalog } = require('./catalog')
 
 const redis = require('redis-mock')
-
-jest.mock('redis', () => jest.requireActual('redis-mock'));
 
 test('whatever', async () => {
     const catalog = await getCatalog()

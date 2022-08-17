@@ -1,5 +1,3 @@
-import Metrics from "../metrics/models/metric";
-
 const axios = require('axios');
 
 const BASE_URL = "http://localhost:80/api"
@@ -46,13 +44,6 @@ let config = {
     'Content-Type': 'application/json',
     Authorization: null 
   }
-}
-
-const userDetails = {
-  name: "Erez",
-  email: "erez@sprkl.dev",
-  password: "1234",
-  _id: null
 }
 
 const order = {

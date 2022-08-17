@@ -16,6 +16,9 @@ services:
 
   payments:
     build: ./payments
+    restart: always
+    depends_on:
+     - "pg"
     environment:
       PG_HOST: pg
       PG_USER: admin
@@ -33,9 +36,10 @@ services:
   pg:
     image: postgres
     restart: always
-    env_file:
-      ./pg.env
     environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: payments
       PGDATA: /data/pg
 
   redis:

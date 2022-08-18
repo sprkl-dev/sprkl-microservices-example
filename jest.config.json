@@ -7,11 +7,12 @@
     "json",
     "ts"
   ],
-  "rootDir": "..",
-  "testRegex": ".e2e-spec.ts$",
+  "rootDir": ".",
+  "testRegex": "\\.test.(ts|js)$",
   "transform": {
-    "^.+\\.ts$": "ts-jest"
+    "^.+\\.ts": "ts-jest"
   },
+
   "globals": {
     "ts-jest": {
       "tsconfig": {

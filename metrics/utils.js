@@ -30,7 +30,6 @@ async function setMetrics(metrics) {
 const metricsURL = "http://metrics:3000"
 
 async function retrieveMetrics() {
-    await new Promise(resolve => setTimeout(resolve, 5));
    const res = await axios.get(`${metricsURL}/metrics`);
    return res;
 }

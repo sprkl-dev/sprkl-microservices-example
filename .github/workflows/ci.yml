@@ -12,7 +12,7 @@ jobs:
 
 
       - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@v0.0.34
+        uses: sprkl-dev/sprkl-action/setup@v0.0.38
         with:
           npm_token: ${{ secrets.SPRKL_NPM_TOKEN }}
           setenv: false
@@ -23,6 +23,6 @@ jobs:
           SPRKL_RECIPE: all
 
       - name: Sprkl Push
-        uses: sprkl-dev/sprkl-action/push@v0.0.34
+        uses: sprkl-dev/sprkl-action/push@v0.0.38
         with:
           token: ${{ secrets.SPRKL_CI_TOKEN }}

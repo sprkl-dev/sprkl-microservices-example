@@ -1,18 +1,11 @@
 const fastify = require('fastify')({ logger: { level: 'trace' } })
 const crypto = require('crypto')
-const {MongoClient} = require('mongodb');
 const {default: axios} = require('axios');
-
-const mongoHost = process.env.MONGO_HOST
-const mongoPort = process.env.MONGO_PORT ?? 27017
-const mongoClient = new MongoClient(`mongodb://${mongoHost}:${mongoPort}/orders`)
-let ordersCollection;
 
 const paymentsURL = process.env.PAYMENTS_URL
 const catalogURL = process.env.CATALOG_URL
 
 async function pay({amount, orderId}) {
-    console.log({amount, orderId})
     try {
         await axios.post(`${paymentsURL}/payments`, { amount, orderId })
         return true

@@ -17,15 +17,25 @@ export default ({ mode }) => {
         clientPort: 80
       },
       proxy: {
+        '/api/payments': {
+          target: `${process.env['VITE_PAYMENTS_URL']}`,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api\/payments/, '')
+        },
         '/api/catalog': {
           target: `${process.env['VITE_CATALOG_URL']}`,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
+          rewrite: (path) => path.replace(/^\/api\/catalog/, '')
         },
         '/api/orders': {
           target: `${process.env['VITE_ORDERS_URL']}`,
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, '')
+          rewrite: (path) => path.replace(/^\/api\/orders/, '')
+        },
+        '/api/metrics': {
+          target: `${process.env['VITE_METRICS_URL']}`,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api\/metrics/, '')
         },
       }
     }

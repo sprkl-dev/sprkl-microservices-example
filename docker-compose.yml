@@ -4,12 +4,15 @@ services:
 
   orders:
     build: ./orders
-    ports:
-      - 3000:3000
     environment:
       MONGO_HOST: mongodb
       PAYMENTS_URL: http://payments:3000
       CATALOG_URL: http://catalog:3000
+
+  metrics:
+    build: ./metrics
+    environment:
+      MONGO_HOST: mongodb
 
   payments:
     build: ./payments
@@ -26,35 +29,29 @@ services:
   mongodb:
     image: mongo
     restart: always
-    ports:
-      - 27017:27017
-    volumes:
-      - mongodb-data:/data/db
 
   pg:
     image: postgres
     restart: always
-    ports:
-      - 5432:5432
     env_file:
       ./pg.env
     environment:
       PGDATA: /data/pg
-    volumes:
-      - pg-data:/data/pg
 
   redis:
     image: redis
     restart: always
-    ports:
-      - 6379:6379
 
   shop:
     build: ./shop
     restart: always
+    environment:
+      VITE_METRICS_URL: http://metrics:3000
+      VITE_CATALOG_URL: http://catalog:3000
+      VITE_ORDERS_URL: http://orders:3000
+      VITE_PAYMENTS_URL: http://payments:3000
+    volumes:
+      - "./shop/src:/code/src"
     ports:
       - "80:5000"
 
-volumes:
-  pg-data:
-  mongodb-data:

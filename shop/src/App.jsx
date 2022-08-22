@@ -25,7 +25,7 @@ export default function App() {
     }, [cart])
 
     const checkout = () => {
-        axios.post(`/api/orders`, {items: cart.map(i => (products.find(p => p.id === i)).name)})
+        axios.post(`/api/orders/orders`, {items: cart.map(i => (products.find(p => p.id === i)).name)})
             .then(resp => {
                 fetchOrders().then(() => {
                     setCart([])
@@ -46,7 +46,7 @@ export default function App() {
     const [isCatalogLoaded, setIsCatalogLoaded] = useState(false)
 
     const fetchProducts = () => {
-         return axios.get(`/api/catalog`)
+         return axios.get(`/api/catalog/catalog`)
              .then(resp => {
                  const data = resp.data.map(i => ({
                      ...i,
@@ -59,7 +59,7 @@ export default function App() {
         //setProducts([{"id":"3","name":"hat","price":100, "image":"/src/assets/products/hat.webp"},{"id":"2","name":"jeans","price":500, "image":"/src/assets/products/jeans.webp"},{"id":"1","name":"t-shirt","price":300, "image":"/src/assets/products/shirt.webp"}])
     }
     const fetchOrders = () => {
-        return axios.get(`/api/orders`)
+        return axios.get(`/api/orders/orders`)
             .then(resp => {
                 setOrders(resp.data)
             })

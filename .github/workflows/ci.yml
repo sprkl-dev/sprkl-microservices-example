@@ -1,0 +1,28 @@
+on: 
+  push:
+    branches:
+      - '**'
+jobs:
+  install-sprkl-test:
+    runs-on: ubuntu-latest
+    name: Installing Sprkl Testing
+    steps:
+
+      - uses: actions/checkout@v3
+
+
+      - name: Sprkl Setup
+        uses: sprkl-dev/sprkl-action/setup@v0.0.38
+        with:
+          npm_token: ${{ secrets.SPRKL_NPM_TOKEN }}
+          setenv: false
+
+      - run: yarn install
+      - run: yarn test:e2e:sprkl
+        env: 
+          SPRKL_RECIPE: all
+
+      - name: Sprkl Push
+        uses: sprkl-dev/sprkl-action/push@v0.0.38
+        with:
+          token: ${{ secrets.SPRKL_CI_TOKEN }}

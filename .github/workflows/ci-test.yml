@@ -12,7 +12,7 @@ jobs:
 
 
       - name: Sprkl Setup and Post Push
-        uses: sprkl-dev/sprkl-action/post-run-push@3f7801e3c63df15256aebd3b6407ed6372c7a770
+        uses: sprkl-dev/sprkl-action/post-run-push@cf611485d4ec7d68ef4245f4d10041f59d904264
         with:
           npm_token: ${{ secrets.SPRKL_NPM_TOKEN }}
           setenv: false

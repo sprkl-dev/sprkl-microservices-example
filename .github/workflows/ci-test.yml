@@ -18,7 +18,7 @@ jobs:
           setenv: false
 
       - name: Sprkl Push
-        uses: sprkl-dev/sprkl-action/post-run-push@8aa9f0acb1ba90e055e6ed6aea0bd490e9f4accd
+        uses: sprkl-dev/sprkl-action/post-run-push@c82f5b47d4a3465a362f57b1341c863b03bc36b4
         with:
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 

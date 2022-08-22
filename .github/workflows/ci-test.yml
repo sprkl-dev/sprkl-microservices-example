@@ -11,15 +11,11 @@ jobs:
       - uses: actions/checkout@v3
 
 
-      - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@v0.0.30
+      - name: Sprkl Setup and Post Push
+        uses: sprkl-dev/sprkl-action/post-run-push@3f7801e3c63df15256aebd3b6407ed6372c7a770
         with:
           npm_token: ${{ secrets.SPRKL_NPM_TOKEN }}
           setenv: false
-
-      - name: Sprkl Push
-        uses: sprkl-dev/sprkl-action/post-run-push@c82f5b47d4a3465a362f57b1341c863b03bc36b4
-        with:
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 
       - run: yarn install

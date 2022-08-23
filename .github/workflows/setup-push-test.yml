@@ -22,7 +22,7 @@ jobs:
 
       - run: echo $NODE_OPTIONS
       - run: echo $SPRKL_PREFIX
-      - run: $echo NODE_PATH
+      - run: echo $NODE_PATH
 
       - run: yarn install
       - run: yarn test:e2e:sprkl

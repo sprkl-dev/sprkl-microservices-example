@@ -1,7 +1,9 @@
 ## This is an example repository for Sprkl
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/sprkl-dev/sprkl-microservices-example)
 
 To run a simple example 
 ```bash
+yarn install 
 yarn example
 ```
 

@@ -18,6 +18,8 @@ jobs:
           analyze: true
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 
+      - run: echo ${{ toJSON(github) }}
+
       - run: yarn install
       - run: yarn test:e2e:sprkl
 

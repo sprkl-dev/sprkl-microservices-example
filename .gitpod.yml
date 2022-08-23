@@ -5,6 +5,17 @@ vscode:
   extensions:
     - https://gitpod-vsix.s3.amazonaws.com/vscode.vsix
 
+ports:
+  - name: Store
+    description: Sprkl store
+    port: 80
+    onOpen: open-browser
+
+  - name: Sprkl
+    description: Sprkl agent
+    port: 57011
+    onOpen: open-browser
+
 tasks:
   - before: |
       mv /workspace/sprkl $HOME/.sprkl

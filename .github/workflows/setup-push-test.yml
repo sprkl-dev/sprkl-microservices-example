@@ -12,11 +12,15 @@ jobs:
 
 
       - name: Sprkl Setup and Post Push
-        uses: sprkl-dev/sprkl-action/setup-and-push@41afd418b124e5e2ec1a047123421e328ef2bf08
+        uses: sprkl-dev/sprkl-action/setup@3b23824d79f9694660633ea7f969fc73bcb51da4
         with:
-          npm_token: ${{ secrets.SPRKL_NPM_TOKEN }}
-          setenv: false
+          setenv: true
+          analyze: true
           token: ${{ secrets.SPRKL_CI_TOKEN }}
+        env:
+          SPRKL_LOG_LEVEL: debug
+
+      - run: echo $NODE_OPTIONS
 
       - run: yarn install
       - run: yarn test:e2e:sprkl

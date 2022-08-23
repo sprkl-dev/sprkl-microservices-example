@@ -6,9 +6,12 @@ vscode:
     - https://gitpod-vsix.s3.amazonaws.com/vscode.vsix
 
 tasks:
-  - before: export PATH="$PATH:$HOME/.sprkl/bin"
+  - before: |
+      mv /workspace/sprkl $HOME/.sprkl
+      export PATH="$PATH:$HOME/.sprkl/bin"
     init: |
       npx --yes @sprkl/scripts@0.0.38 install
+      mv $HOME/.sprkl /workspace/sprkl
       yarn install
     command: yarn run example
 

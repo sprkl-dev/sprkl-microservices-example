@@ -12,7 +12,7 @@ jobs:
 
 
       - name: Sprkl Setup and Post Push
-        uses: sprkl-dev/sprkl-action/setup@218787cfda54fee407a274d57e98d4f7aa4b405f
+        uses: sprkl-dev/sprkl-action/setup@de7c35112736a87d3ca710bbb8c5db58bafcaca3
         with:
           setenv: true
           analyze: true
@@ -21,6 +21,8 @@ jobs:
           SPRKL_LOG_LEVEL: debug
 
       - run: echo $NODE_OPTIONS
+      - run: echo $SPRKL_PREFIX
+      - run: $echo NODE_PATH
 
       - run: yarn install
       - run: yarn test:e2e:sprkl

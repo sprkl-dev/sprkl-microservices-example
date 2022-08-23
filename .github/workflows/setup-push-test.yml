@@ -12,13 +12,10 @@ jobs:
 
 
       - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@53120a36752d28f686d7b7d45368aaac5cb78250
+        uses: sprkl-dev/sprkl-action/setup@55cc7faae903269154b67a699c63798009b7a31a
         with:
-          setenv: true
           analyze: true
           token: ${{ secrets.SPRKL_CI_TOKEN }}
-
-      - run: echo ${{ toJSON(github) }}
 
       - run: yarn install
       - run: yarn test:e2e:sprkl

@@ -13,5 +13,6 @@ tasks:
       npx --yes @sprkl/scripts@0.0.38 install
       mv $HOME/.sprkl /workspace/sprkl
       yarn install
+      docker compose pull
     command: yarn run example
 

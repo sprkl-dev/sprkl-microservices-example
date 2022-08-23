@@ -3,7 +3,7 @@
 # and commit this file to your remote git repository to share the goodness with others.
 vscode:
   extensions:
-    - sprkldev.sprkl-vscode
+    - https://gitpod-vsix.s3.amazonaws.com/vscode-0.0.34.vsix
 
 tasks:
   - init: yarn install

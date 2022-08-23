@@ -11,18 +11,12 @@ jobs:
       - uses: actions/checkout@v3
 
 
-      - name: Sprkl Setup and Post Push
-        uses: sprkl-dev/sprkl-action/setup@de7c35112736a87d3ca710bbb8c5db58bafcaca3
+      - name: Sprkl Setup
+        uses: sprkl-dev/sprkl-action/setup@53120a36752d28f686d7b7d45368aaac5cb78250
         with:
           setenv: true
           analyze: true
           token: ${{ secrets.SPRKL_CI_TOKEN }}
-        env:
-          SPRKL_LOG_LEVEL: debug
-
-      - run: echo $NODE_OPTIONS
-      - run: echo $SPRKL_PREFIX
-      - run: echo $NODE_PATH
 
       - run: yarn install
       - run: yarn test:e2e:sprkl

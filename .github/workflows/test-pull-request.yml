@@ -11,7 +11,7 @@ jobs:
 
 
       - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@f50ec48bd1f5c261f3870aeb872a1890427a9712
+        uses: sprkl-dev/sprkl-action/setup@625a8380afd334c901ab878d6ee8497ebe12ce8f
         with:
           analyze: true
           token: ${{ secrets.SPRKL_CI_TOKEN }}

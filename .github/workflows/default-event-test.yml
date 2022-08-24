@@ -1,0 +1,22 @@
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  install-sprkl-test:
+    runs-on: ubuntu-latest
+    name: Installing Sprkl Testing
+    steps:
+
+      - uses: actions/checkout@v3
+
+
+      - name: Sprkl Setup
+        uses: sprkl-dev/sprkl-action/setup@7466f244ad2f86c124c116daf165e3c177902be5
+        with:
+          analyze: true
+          token: ${{ secrets.SPRKL_CI_TOKEN }}
+
+      - run: yarn install
+      - run: yarn test:e2e:sprkl
+
+      

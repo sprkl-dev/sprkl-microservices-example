@@ -13,7 +13,7 @@ jobs:
       - name: Sprkl Setup
         uses: sprkl-dev/sprkl-action/setup@master
         with:
-          analyze: true
+          analyze: false
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 
       - run: yarn install

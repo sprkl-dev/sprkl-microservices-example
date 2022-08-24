@@ -17,6 +17,9 @@ jobs:
           analyze: true
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 
+      - run: echo $SPRKL_RECIPE
+      - run: echo $SPRKL_COMMITS
+
       - run: yarn install
       - run: yarn test:e2e:sprkl
 

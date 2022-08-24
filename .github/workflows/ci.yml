@@ -10,17 +10,11 @@ jobs:
 
       - uses: actions/checkout@v3
 
-
       - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@v0.0.30
+        uses: sprkl-dev/sprkl-action/setup@master
         with:
-          npm_token: ${{ secrets.SPRKL_NPM_TOKEN }}
-          setenv: false
+          analyze: true
+          token: ${{ secrets.SPRKL_CI_TOKEN }}
 
       - run: yarn install
       - run: yarn test:e2e:sprkl
-
-      - name: Sprkl Push
-        uses: sprkl-dev/sprkl-action/push@v0.0.30
-        with:
-          token: ${{ secrets.SPRKL_CI_TOKEN }}

@@ -12,9 +12,10 @@ jobs:
 
 
       - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@9ed707ce91bc880208a050e2739cbaa575005e28
+        uses: sprkl-dev/sprkl-action/setup@handle-workflows-events
         with:
           analyze: true
+          recipe: commitsList
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 
       - run: echo $SPRKL_RECIPE

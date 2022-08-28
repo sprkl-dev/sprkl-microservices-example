@@ -13,8 +13,7 @@ jobs:
       - name: Sprkl Setup
         uses: sprkl-dev/sprkl-action/setup@ed66a7adcefacf429317b6152cc36158188b1700
         with:
-          analyze: true
-          recipe: recent
+          analyze: false
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 
       - run: echo $SPRKL_RECIPE

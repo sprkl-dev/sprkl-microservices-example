@@ -11,13 +11,14 @@ jobs:
 
 
       - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@5d10308e9d75da345f6d8991852a6176aea68805
+        uses: sprkl-dev/sprkl-action/setup@a2e15cba88ea047cae5a0a718b2161b4154b00e1
         with:
           analyze: false
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 
       - run: echo $SPRKL_RECIPE
       - run: echo $SPRKL_COMMITS
+      - run: sprkl apply --log-level=debug
 
       - run: yarn install
       - run: yarn test:e2e:sprkl

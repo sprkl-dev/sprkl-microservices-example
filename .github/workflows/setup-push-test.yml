@@ -12,9 +12,10 @@ jobs:
 
 
       - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@5d10308e9d75da345f6d8991852a6176aea68805
+        uses: sprkl-dev/sprkl-action/setup@master
         with:
-          analyze: false
+          analyze: true
+          analysisCwd: "./catalog"
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 
       - run: echo $SPRKL_RECIPE

@@ -1,7 +1,6 @@
-on: 
-  push:
-    branches:
-      - '**'
+on:
+  pull_request_review:
+    types: [submitted, edited]
 jobs:
   install-sprkl-test:
     runs-on: ubuntu-latest
@@ -10,11 +9,18 @@ jobs:
 
       - uses: actions/checkout@v3
 
+
       - name: Sprkl Setup
-        uses: sprkl-dev/sprkl-action/setup@master
+        uses: sprkl-dev/sprkl-action/setup@19f649081bea28e51b994628f339fc493dee37e3
         with:
+          recipe: rec
           analyze: false
           token: ${{ secrets.SPRKL_CI_TOKEN }}
 
+      - run: echo $SPRKL_RECIPE
+      - run: echo $SPRKL_COMMITS
+
       - run: yarn install
       - run: yarn test:e2e:sprkl
+
+      

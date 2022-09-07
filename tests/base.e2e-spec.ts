@@ -62,6 +62,7 @@ const order = {
 }
 
 test('PlaceOrder', async () => {
+  fail('reason');
     const res = await axios.post(ORDERS_URL, order, config);
   expect(res.status).toBe(200)
 })
